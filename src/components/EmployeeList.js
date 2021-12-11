@@ -1,26 +1,31 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import Employee from "./Employee";
+
 import Pagination from "./Pagination";
 
 const EmployeeList = () => {
+  const employees = useSelector((state) => state.employees);
+
   return (
-    <div class="table-responsive">
-      <div class="table-wrapper">
-        <div class="table-title">
-          <div class="row">
-            <div class="col-sm-6">
+    <div className="table-responsive">
+      <div className="table-wrapper">
+        <div className="table-title">
+          <div className="row">
+            <div className="col-sm-6">
               <h2>
                 Manage <b>Employees</b>
               </h2>
             </div>
-            <div class="col-sm-6">
-              <a href="!#" class="btn btn-success">
-                <i class="material-icons">&#xE147;</i>{" "}
+            <div className="col-sm-6">
+              <a href="!#" className="btn btn-success">
+                <i className="material-icons">&#xE147;</i>{" "}
                 <span>Add New Employee</span>
               </a>
             </div>
           </div>
         </div>
-        <table class="table table-striped table-hover">
+        <table className="table table-striped table-hover">
           <thead>
             <tr>
               <th>Name</th>
@@ -31,28 +36,9 @@ const EmployeeList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Thomas Hardy</td>
-              <td>thomashardy@mail.com</td>
-              <td>89 Chiaroscuro Rd, Portland, USA</td>
-              <td>(171) 555-2222</td>
-              <td>
-                <a href="!#" class="edit">
-                  <i class="material-icons" data-toggle="tooltip" title="Edit">
-                    &#xE254;
-                  </i>
-                </a>
-                <a href="!#" class="delete">
-                  <i
-                    class="material-icons"
-                    data-toggle="tooltip"
-                    title="Delete"
-                  >
-                    &#xE872;
-                  </i>
-                </a>
-              </td>
-            </tr>
+            {employees.map((employee) => (
+              <Employee employee={employee} key={employee.id} />
+            ))}
           </tbody>
         </table>
         <Pagination />

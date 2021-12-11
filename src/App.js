@@ -5,7 +5,7 @@ import EmployeeList from "./components/EmployeeList";
 const App = () => {
   return (
     <div>
-      <div class="container-xl">
+      <div className="container-xl">
         <EmployeeList />
       </div>
     </div>

@@ -2,41 +2,41 @@ import React from "react";
 
 const Pagination = () => {
   return (
-    <div class="clearfix">
-      <div class="hint-text">
+    <div className="clearfix">
+      <div className="hint-text">
         Showing <b>5</b> out of <b>25</b> entries
       </div>
-      <ul class="pagination">
-        <li class="page-item disabled">
+      <ul className="pagination">
+        <li className="page-item disabled">
           <a href="!#">Previous</a>
         </li>
-        <li class="page-item">
-          <a href="!#" class="page-link">
+        <li className="page-item">
+          <a href="!#" className="page-link">
             1
           </a>
         </li>
-        <li class="page-item">
-          <a href="!#" class="page-link">
+        <li className="page-item">
+          <a href="!#" className="page-link">
             2
           </a>
         </li>
-        <li class="page-item active">
-          <a href="!#" class="page-link">
+        <li className="page-item active">
+          <a href="!#" className="page-link">
             3
           </a>
         </li>
-        <li class="page-item">
-          <a href="!#" class="page-link">
+        <li className="page-item">
+          <a href="!#" className="page-link">
             4
           </a>
         </li>
-        <li class="page-item">
-          <a href="!#" class="page-link">
+        <li className="page-item">
+          <a href="!#" className="page-link">
             5
           </a>
         </li>
-        <li class="page-item">
-          <a href="!#" class="page-link">
+        <li className="page-item">
+          <a href="!#" className="page-link">
             Next
           </a>
         </li>
