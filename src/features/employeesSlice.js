@@ -44,9 +44,11 @@ export const employeesSlice = createSlice({
   initialState,
   reducers: {
     addMovie: (state, action) => [...state, action.payload],
+    deleteMovie: (state, action) =>
+      state.filter((e) => e.id !== action.payload),
   },
 });
 
-export const { addMovie } = employeesSlice.actions;
+export const { addMovie, deleteMovie } = employeesSlice.actions;
 
 export default employeesSlice.reducer;
