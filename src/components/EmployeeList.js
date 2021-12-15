@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Employee from "./Employee";
+import { Link } from "react-router-dom";
 
+import Employee from "./Employee";
 import Pagination from "./Pagination";
 
 const EmployeeList = () => {
@@ -18,10 +19,10 @@ const EmployeeList = () => {
               </h2>
             </div>
             <div className="col-sm-6">
-              <a href="!#" className="btn btn-success">
+              <Link to="/addemployee" className="btn btn-success">
                 <i className="material-icons">&#xE147;</i>{" "}
                 <span>Add New Employee</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

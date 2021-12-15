@@ -42,7 +42,11 @@ const initialState = [
 export const employeesSlice = createSlice({
   name: "employees",
   initialState,
-  reducers: {},
+  reducers: {
+    addMovie: (state, action) => [...state, action.payload],
+  },
 });
+
+export const { addMovie } = employeesSlice.actions;
 
 export default employeesSlice.reducer;
