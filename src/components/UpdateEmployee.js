@@ -1,24 +1,27 @@
-import React from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addEmployee } from "../features/employeesSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { updateEmployee } from "../features/employeesSlice";
 import * as Yup from "yup";
-import { v4 as uuidv4 } from "uuid";
+import ErrorPage from "../components/ErrorPage";
 
-const AddEmployee = () => {
+const UpdateEmployee = () => {
+  const { id } = useParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const employees = useSelector((state) => state.employees);
+  const currentEmployee = employees.find((e) => e.id === id);
 
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  const { handleChange, handleSubmit, handleBlur, errors, touched } = useFormik(
-    {
-      initialValues: { name: "", email: "", address: "", phone: "" },
+  const { handleChange, handleSubmit, handleBlur, values, errors, touched } =
+    useFormik({
+      initialValues: currentEmployee,
       onSubmit: (values) => {
-        dispatch(addEmployee({ id: uuidv4(), ...values }));
+        dispatch(updateEmployee(values));
         navigate("/");
       },
       validationSchema: Yup.object().shape({
@@ -29,8 +32,11 @@ const AddEmployee = () => {
           .matches(phoneRegExp, "Phone number is not valid")
           .required(),
       }),
-    }
-  );
+    });
+
+  if (currentEmployee === undefined) {
+    return <ErrorPage />;
+  }
 
   return (
     <form style={{ padding: "50px 200px" }} onSubmit={handleSubmit} noValidate>
@@ -40,9 +46,10 @@ const AddEmployee = () => {
           type="text"
           id="exampleInputName"
           name="name"
-          className="form-control"
           onChange={handleChange}
           onBlur={handleBlur}
+          value={values.name}
+          className="form-control"
         />
         {errors.name && touched.name && (
           <div className="error">{errors.name}</div>
@@ -54,9 +61,10 @@ const AddEmployee = () => {
           type="email"
           id="exampleInputEmail"
           name="email"
-          className="form-control"
           onChange={handleChange}
           onBlur={handleBlur}
+          value={values.email}
+          className="form-control"
         />
         {errors.email && touched.email && (
           <div className="error">{errors.email}</div>
@@ -69,9 +77,10 @@ const AddEmployee = () => {
           className="form-control"
           id="exampleInputAddress"
           name="address"
-          rows="3"
+          value={values.address}
           onChange={handleChange}
           onBlur={handleBlur}
+          rows="3"
         />
         {errors.address && touched.address && (
           <div className="error">{errors.address}</div>
@@ -83,16 +92,17 @@ const AddEmployee = () => {
           type="text"
           id="exampleInputPhone"
           name="phone"
-          className="form-control"
+          value={values.phone}
           onChange={handleChange}
           onBlur={handleBlur}
+          className="form-control"
         />
         {errors.phone && touched.phone && (
           <div className="error">{errors.phone}</div>
         )}
       </div>
-      <button type="submit" className="btn btn-primary">
-        Add
+      <button type="submit" className="btn btn-success">
+        Update
       </button>
       <Link to="/" className="btn btn-danger ml-2">
         Cancel
@@ -101,4 +111,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default UpdateEmployee;

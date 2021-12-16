@@ -1,6 +1,7 @@
 import React from "react";
-import { deleteMovie } from "../features/employeesSlice";
+import { deleteEmployee } from "../features/employeesSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Employee = ({ employee }) => {
   const dispatch = useDispatch();
@@ -12,14 +13,14 @@ const Employee = ({ employee }) => {
       <td>{employee.address}</td>
       <td>{employee.phone}</td>
       <td width="110">
-        <button className="btn text-warning btn-act">
+        <Link to={`/updateemployee/${employee.id}`} className="btn text-warning btn-act">
           <i className="material-icons" title="Edit">
             &#xE254;
           </i>
-        </button>
+        </Link>
         <button
           className="btn text-danger btn-act"
-          onClick={() => dispatch(deleteMovie(employee.id))}
+          onClick={() => dispatch(deleteEmployee(employee.id))}
         >
           <i className="material-icons" title="Delete">
             &#xE872;
