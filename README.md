@@ -1,3 +1,3 @@
 # Manage Employees
 
-https://manage-emp.surge.sh
+https://manage-emp.netlify.app/
