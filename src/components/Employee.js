@@ -13,7 +13,10 @@ const Employee = ({ employee }) => {
       <td>{employee.address}</td>
       <td>{employee.phone}</td>
       <td width="110">
-        <Link to={`/updateemployee/${employee.id}`} className="btn text-warning btn-act">
+        <Link
+          to={`/updateemployee/${employee.id}`}
+          className="btn text-warning btn-act"
+        >
           <i className="material-icons" title="Edit">
             &#xE254;
           </i>

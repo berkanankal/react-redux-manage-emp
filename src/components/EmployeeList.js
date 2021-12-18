@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,6 +7,20 @@ import Pagination from "./Pagination";
 
 const EmployeeList = () => {
   const employees = useSelector((state) => state.employees);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [employeesPerPage] = useState(5);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = employees.slice(
+    indexOfFirstEmployee,
+    indexOfLastEmployee
+  );
 
   return (
     <div className="table-responsive">
@@ -37,12 +51,18 @@ const EmployeeList = () => {
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee) => (
+            {currentEmployees.map((employee) => (
               <Employee employee={employee} key={employee.id} />
             ))}
           </tbody>
         </table>
-        <Pagination />
+        <Pagination
+          totalEmployees={employees.length}
+          employeesPerPage={employeesPerPage}
+          currentPage={currentPage}
+          paginate={paginate}
+          currentEmployees={currentEmployees}
+        />
       </div>
     </div>
   );
